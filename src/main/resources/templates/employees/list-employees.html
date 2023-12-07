@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Directory</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <div class="container">
+        <h3>Employee Directory</h3>
+        <hr>
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${message}">
+            <span th:text="${message}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+
+        <a th:href="@{/employees/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+            Add Employee
+        </a>
+
+        <a th:href="@{/companies/list}" class="btn btn-primary btn-sm mb-3">
+            Companies
+        </a>
+        
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-secondary">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Company Id</th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="tempEmployee : ${employees}">
+
+                <td th:text="${tempEmployee.firstName}"/>
+                <td th:text="${tempEmployee.lastName}"/>
+                <td th:text="${tempEmployee.email}"/>
+                <td th:text="${tempEmployee.companyId}"/>
+                <td>
+                    <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}" class="btn btn-info btn-sm">
+                        Update
+                    </a>
+
+                    <a th:href="@{/employees/delete(employeeId=${tempEmployee.id})}" class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
